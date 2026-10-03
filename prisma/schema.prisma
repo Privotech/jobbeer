@@ -1,0 +1,242 @@
+// Prisma Schema 7.8.0 for GlobalHire Full-Stack Application
+// Course: Computer Science / Information Technology — Final Year Project
+// Database: MySQL | Framework: Next.js with TypeScript
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  SEEKER
+  EMPLOYER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  PENDING_VERIFICATION
+}
+
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  INTERNSHIP
+}
+
+enum ExperienceLevel {
+  ENTRY
+  MID
+  SENIOR
+  LEAD
+  EXECUTIVE
+}
+
+enum WorkPreference {
+  REMOTE
+  HYBRID
+  ONSITE
+}
+
+enum JobStatus {
+  OPEN
+  CLOSED
+  DRAFT
+}
+
+enum ModerationStatus {
+  APPROVED
+  PENDING
+  FLAGGED
+}
+
+enum ApplicationStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  SHORTLISTED
+  INTERVIEW_SCHEDULED
+  REJECTED
+  HIRED
+}
+
+enum InterviewStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  passwordHash String
+  role         Role          @default(SEEKER)
+  status       UserStatus    @default(ACTIVE)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  profile      Profile?
+  company      Company?
+  applications Application[]
+  savedJobs    SavedJob[]
+  auditLogs    AuditLog[]
+
+  @@index([email])
+  @@index([role])
+}
+
+model Profile {
+  id              String         @id @default(uuid())
+  userId          String         @unique
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fullName        String
+  headline        String?
+  bio             String?        @db.Text
+  location        String
+  timezone        String         // e.g., "UTC+1", "UTC-5", "UTC+5:30"
+  utcOffset       Float          // Numerical offset in hours: e.g. 1.0, -5.0, 5.5
+  skills          Json           // Array of strings: ["TypeScript", "Next.js", "MySQL", ...]
+  experienceYears Int            @default(0)
+  expectedSalary  Int?
+  currency        String         @default("USD")
+  resumeUrl       String?
+  resumeFileName  String?
+  githubUrl       String?
+  linkedinUrl     String?
+  portfolioUrl    String?
+  workPreference  WorkPreference @default(REMOTE)
+  avatarUrl       String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([location])
+  @@index([experienceYears])
+}
+
+model Company {
+  id           String    @id @default(uuid())
+  userId       String    @unique
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name         String
+  industry     String
+  headquarters String
+  timezone     String
+  website      String?
+  logoUrl      String?
+  description  String    @db.Text
+  teamSize     String    // e.g., "50-200", "500+"
+  verified     Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  jobs         Job[]
+
+  @@index([name])
+}
+
+model Job {
+  id                  String           @id @default(uuid())
+  companyId           String
+  company             Company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  title               String
+  department          String
+  description         String           @db.Text
+  requirements        Json             // Array of strings
+  niceToHave          Json?            // Array of strings
+  skills              Json             // Required skills tags: ["React", "Node.js", "Docker"]
+  employmentType      JobType          @default(FULL_TIME)
+  experienceLevel     ExperienceLevel  @default(MID)
+  location            String
+  isRemote            Boolean          @default(true)
+  timezoneRequirement String?          // e.g. "UTC-5 to UTC+2"
+  targetUtcOffset     Float?           // Primary team center offset
+  minOverlapHours     Int              @default(4)
+  salaryMin           Int
+  salaryMax           Int
+  currency            String           @default("USD")
+  status              JobStatus        @default(OPEN)
+  moderationStatus    ModerationStatus @default(APPROVED)
+  featured            Boolean          @default(false)
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+
+  applications        Application[]
+  savedBy             SavedJob[]
+
+  @@index([title])
+  @@index([isRemote])
+  @@index([status, moderationStatus])
+  @@index([salaryMin, salaryMax])
+}
+
+model Application {
+  id                String            @id @default(uuid())
+  jobId             String
+  job               Job               @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  seekerId          String
+  seeker            User              @relation(fields: [seekerId], references: [id], onDelete: Cascade)
+  status            ApplicationStatus @default(SUBMITTED)
+  matchScore        Float             // Calculated percentage (0.0 to 100.0)
+  matchBreakdown    Json              // Detailed score metrics
+  coverLetter       String?           @db.Text
+  resumeSnapshotUrl String?
+  notes             String?           @db.Text
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  interviews        Interview[]
+
+  @@unique([jobId, seekerId])
+  @@index([status])
+  @@index([matchScore])
+}
+
+model SavedJob {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobId     String
+  job       Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, jobId])
+}
+
+model Interview {
+  id              String          @id @default(uuid())
+  applicationId   String
+  application     Application     @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  scheduledAt     DateTime
+  durationMinutes Int             @default(45)
+  timezone        String
+  meetingLink     String
+  meetingPlatform String          @default("Google Meet")
+  notes           String?         @db.Text
+  status          InterviewStatus @default(SCHEDULED)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([scheduledAt])
+  @@index([status])
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  actorId    String?
+  actor      User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  actorEmail String
+  action     String   // e.g., "USER_REGISTERED", "JOB_MODERATED", "APPLICATION_SUBMITTED"
+  entityType String   // "JOB", "USER", "APPLICATION", "INTERVIEW"
+  entityId   String
+  details    Json?
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  @@index([action])
+  @@index([createdAt])
+}

@@ -1,0 +1,6 @@
+{
+  "name": "GlobalHire - Smart Global Job Matching Platform",
+  "description": "Final Year Computer Science / IT project: Full-stack global job-finding application with intelligent skill-matching algorithms, resume parsing, ATS pipeline, and timezone-aware filtering.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
