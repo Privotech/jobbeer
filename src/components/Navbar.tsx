@@ -66,7 +66,7 @@ export default function Navbar({
   const currentPersona = demoPersonas.find((p) => p.id === currentUser?.id) || demoPersonas[0];
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-200">
+    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-sky-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         
         {/* Zone 1: Brand Zone */}
@@ -77,7 +77,7 @@ export default function Navbar({
               e.preventDefault();
               setActiveView('landing');
             }}
-            className="text-xl font-bold tracking-tight text-neutral-900 hover:text-neutral-700 transition-colors"
+            className="text-xl font-bold tracking-tight text-sky-700 hover:text-sky-900 transition-colors"
           >
             GlobalHire
           </Link>
@@ -85,19 +85,19 @@ export default function Navbar({
           {/* Academic Project Presentation Link */}
           <button
             onClick={onOpenAcademicDeck}
-            className="hidden lg:flex items-center gap-1.5 text-xs font-medium text-neutral-500 hover:text-neutral-900 py-1 px-2.5 rounded-md hover:bg-neutral-100 transition-colors"
+            className="hidden lg:flex items-center gap-1.5 text-xs font-medium text-sky-700 hover:text-sky-900 py-1 px-2.5 rounded-md hover:bg-sky-50 transition-colors"
           >
-            <GraduationCap className="w-3.5 h-3.5 text-neutral-600" />
+            <GraduationCap className="w-3.5 h-3.5 text-sky-600" />
             <span>Final Year Project (Slides & Viva Mode)</span>
           </button>
         </div>
 
         {/* Zone 2: Navigation Links */}
-        <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-neutral-600">
+        <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
           <button
             onClick={() => setActiveView('landing')}
-            className={`transition-colors hover:text-neutral-900 py-1 ${
-              activeView === 'landing' ? 'text-neutral-900 border-b-2 border-neutral-900' : ''
+            className={`transition-colors hover:text-sky-700 py-1 ${
+              activeView === 'landing' ? 'text-sky-700 border-b-2 border-sky-600' : ''
             }`}
           >
             Overview
@@ -105,8 +105,8 @@ export default function Navbar({
 
           <button
             onClick={() => setActiveView('jobs')}
-            className={`transition-colors hover:text-neutral-900 py-1 ${
-              activeView === 'jobs' ? 'text-neutral-900 border-b-2 border-neutral-900' : ''
+            className={`transition-colors hover:text-sky-700 py-1 ${
+              activeView === 'jobs' ? 'text-sky-700 border-b-2 border-sky-600' : ''
             }`}
           >
             Explore Jobs
@@ -117,8 +117,8 @@ export default function Navbar({
             <>
               <button
                 onClick={() => setActiveView('matches')}
-                className={`transition-colors hover:text-neutral-900 py-1 ${
-                  activeView === 'matches' ? 'text-neutral-900 border-b-2 border-neutral-900' : ''
+                className={`transition-colors hover:text-sky-700 py-1 ${
+                  activeView === 'matches' ? 'text-sky-700 border-b-2 border-sky-600' : ''
                 }`}
               >
                 Smart Matches
@@ -126,8 +126,8 @@ export default function Navbar({
 
               <button
                 onClick={() => setActiveView('applications')}
-                className={`transition-colors hover:text-neutral-900 py-1 ${
-                  activeView === 'applications' ? 'text-neutral-900 border-b-2 border-neutral-900' : ''
+                className={`transition-colors hover:text-sky-700 py-1 ${
+                  activeView === 'applications' ? 'text-sky-700 border-b-2 border-sky-600' : ''
                 }`}
               >
                 My Applications
@@ -139,8 +139,8 @@ export default function Navbar({
           {currentUser && (currentUser.role === 'EMPLOYER' || currentUser.role === 'ADMIN') && (
             <button
               onClick={() => setActiveView('employer')}
-              className={`transition-colors hover:text-neutral-900 py-1 ${
-                activeView === 'employer' ? 'text-neutral-900 border-b-2 border-neutral-900' : ''
+              className={`transition-colors hover:text-sky-700 py-1 ${
+                activeView === 'employer' ? 'text-sky-700 border-b-2 border-sky-600' : ''
               }`}
             >
               Employer ATS
@@ -151,8 +151,8 @@ export default function Navbar({
           {currentUser && currentUser.role === 'ADMIN' && (
             <button
               onClick={() => setActiveView('admin')}
-              className={`transition-colors hover:text-neutral-900 py-1 ${
-                activeView === 'admin' ? 'text-neutral-900 border-b-2 border-neutral-900' : ''
+              className={`transition-colors hover:text-sky-700 py-1 ${
+                activeView === 'admin' ? 'text-sky-700 border-b-2 border-sky-600' : ''
               }`}
             >
               Admin Console
@@ -197,13 +197,13 @@ export default function Navbar({
               )}
               <button
                 onClick={() => onOpenAuth('signin')}
-                className="px-3.5 py-1.5 text-xs font-semibold text-neutral-700 hover:text-neutral-900 rounded-lg hover:bg-neutral-100 transition-colors"
+                className="px-3.5 py-1.5 text-xs font-semibold text-slate-700 hover:text-sky-700 rounded-lg hover:bg-sky-50 transition-colors"
               >
                 Sign In
               </button>
               <button
                 onClick={() => onOpenAuth('signup')}
-                className="px-4 py-1.5 text-xs font-bold text-white bg-neutral-900 hover:bg-neutral-800 rounded-xl transition-all shadow-xs flex items-center gap-1.5"
+                className="px-4 py-1.5 text-xs font-bold text-white bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 rounded-xl transition-all shadow-sm flex items-center gap-1.5"
               >
                 <span>Get Started</span>
                 <ArrowRight className="w-3.5 h-3.5" />

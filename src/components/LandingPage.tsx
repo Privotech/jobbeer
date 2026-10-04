@@ -53,7 +53,7 @@ export default function LandingPage({
   return (
     <div className="space-y-16 pb-16">
       {/* MODERN REFINED HERO SECTION WITH SUBTLE MESH GRADIENT & REFINED TYPOGRAPHY */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-50/90 via-white to-slate-50 text-neutral-950 border border-indigo-100/70 shadow-sm">
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-sky-50 via-white to-indigo-50 text-slate-950 border border-sky-100 shadow-sm">
         {/* Subtle Ambient Radial Lighting & Grid Matrix */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-15%,rgba(99,102,241,0.07),rgba(255,255,255,0))] pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(#6366f110_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
@@ -66,21 +66,21 @@ export default function LandingPage({
           {/* Left Column: Headline, Value Proposition, Action CTAs */}
           <div className="lg:col-span-7 space-y-6">
             {/* Project Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-xs font-mono text-neutral-600 border border-indigo-100 shadow-2xs">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-xs font-mono text-slate-600 border border-sky-100 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>Final Year Computer Science / IT Project</span>
-              <span aria-hidden="true" className="text-neutral-400">·</span>
-              <span className="text-neutral-900 font-medium">GlobalHire</span>
+              <span aria-hidden="true" className="text-slate-400">·</span>
+              <span className="text-sky-700 font-medium">GlobalHire</span>
             </div>
 
             {/* Headline with Increased Line Height for Legibility */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-950 leading-[1.2] sm:leading-[1.22] lg:leading-[1.24] text-balance">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-950 leading-[1.2] sm:leading-[1.22] lg:leading-[1.24] text-balance">
               Global Tech Talent. <br />
-              <span className="text-neutral-500 font-semibold">Algorithmic Precision.</span>
+              <span className="text-sky-700 font-semibold">Algorithmic Precision.</span>
             </h1>
 
             {/* Body */}
-            <p className="text-sm sm:text-base text-neutral-600 leading-relaxed max-w-xl text-balance">
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl text-balance">
               A high-throughput full-stack employment platform connecting international developers and employers using
               multi-attribute skill scoring, timezone overlap calculations, and automated ATS workflows.
             </p>
@@ -98,7 +98,7 @@ export default function LandingPage({
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
                 onClick={() => onOpenAuth('signup', 'SEEKER')}
-                className="px-6 py-3 text-xs font-semibold text-white bg-neutral-950 hover:bg-neutral-800 rounded-xl transition-all shadow-sm hover:shadow flex items-center gap-2"
+                className="px-6 py-3 text-xs font-semibold text-white bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center gap-2"
               >
                 <span>Find Matched Roles</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -106,35 +106,35 @@ export default function LandingPage({
 
               <button
                 onClick={() => onOpenAuth('signup', 'EMPLOYER')}
-                className="px-6 py-3 text-xs font-semibold text-neutral-800 bg-white hover:bg-neutral-50 rounded-xl border border-neutral-200/90 shadow-2xs transition-all flex items-center gap-2"
+                className="px-6 py-3 text-xs font-semibold text-slate-800 bg-white hover:bg-sky-50 rounded-xl border border-sky-200 shadow-sm transition-all flex items-center gap-2"
               >
-                <Briefcase className="w-3.5 h-3.5 text-neutral-600" />
+                <Briefcase className="w-3.5 h-3.5 text-sky-600" />
                 <span>Hire Global Developers</span>
               </button>
 
               <button
                 onClick={onOpenAcademicDeck}
-                className="px-3.5 py-3 text-xs font-medium text-neutral-600 hover:text-neutral-950 transition-colors flex items-center gap-1.5"
+                className="px-3.5 py-3 text-xs font-medium text-slate-600 hover:text-sky-700 transition-colors flex items-center gap-1.5"
               >
-                <GraduationCap className="w-4 h-4 text-neutral-500" />
+                <GraduationCap className="w-4 h-4 text-sky-600" />
                 <span>Viva Defense Slides</span>
               </button>
             </div>
 
             {/* Quick Metrics Bar */}
-            <div className="pt-6 border-t border-neutral-200/60 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-mono text-neutral-500">
+            <div className="pt-6 border-t border-sky-100 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-mono text-slate-500">
               <div className="flex items-center gap-1.5">
-                <span className="font-semibold text-neutral-900 tabular-nums">Next.js 16</span>
-                <span className="text-neutral-400">/</span>
+                <span className="font-semibold text-slate-900 tabular-nums">Next.js 16</span>
+                <span className="text-slate-400">/</span>
                 <span>TypeScript</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="font-semibold text-neutral-900 tabular-nums">Prisma 7.8</span>
-                <span className="text-neutral-400">/</span>
+                <span className="font-semibold text-slate-900 tabular-nums">Prisma 7.8</span>
+                <span className="text-slate-400">/</span>
                 <span>MySQL</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="text-emerald-700 font-semibold tabular-nums">4-Pillar</span>
+                <span className="text-emerald-600 font-semibold tabular-nums">4-Pillar</span>
                 <span>Matching Engine</span>
               </div>
             </div>
