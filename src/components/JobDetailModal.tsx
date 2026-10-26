@@ -257,7 +257,7 @@ export default function JobDetailModal({
                       <button
                         type="button"
                         onClick={() => onOpenAiAssistant(job, isFreelance ? 'freelance_pitch' : 'cover_letter')}
-                        className="text-[11px] font-semibold text-indigo-700 hover:text-indigo-900 flex items-center gap-1 hover:underline"
+                        className="text-[11px] font-semibold text-brand-primary hover:opacity-85 flex items-center gap-1 hover:underline"
                       >
                         <Sparkles className="w-3 h-3 text-amber-500" />
                         <span>{isFreelance ? 'Draft Proposal with AI' : 'Draft Cover Letter with AI'}</span>
@@ -283,7 +283,7 @@ export default function JobDetailModal({
                   <button
                     onClick={handleApply}
                     disabled={isApplying}
-                    className="px-5 py-2 text-xs font-medium text-white bg-neutral-900 hover:bg-neutral-800 rounded-lg transition-colors flex items-center gap-1.5 shadow-sm disabled:opacity-50"
+                    className="px-5 py-2 text-xs font-bold text-white bg-brand-primary hover:bg-brand-primary-hover rounded-xl transition-all flex items-center gap-1.5 shadow-brand disabled:opacity-50"
                   >
                     <span>{isApplying ? 'Submitting...' : 'Submit Application'}</span>
                     <ArrowRight className="w-3.5 h-3.5" />

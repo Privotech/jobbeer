@@ -9,7 +9,6 @@ import EmployerDashboard from '@/components/EmployerDashboard';
 import AdminDashboard from '@/components/AdminDashboard';
 import JobDetailModal from '@/components/JobDetailModal';
 import ProfileModal from '@/components/ProfileModal';
-import AcademicPresentationModal from '@/components/AcademicPresentationModal';
 import AuthModal from '@/components/AuthModal';
 import PricingModal from '@/components/PricingModal';
 import AICVAssistantModal from '@/components/AICVAssistantModal';
@@ -35,7 +34,6 @@ export default function HomePage() {
   // Modals
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-  const [isAcademicModalOpen, setIsAcademicModalOpen] = useState(false);
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
   const [aiAssistantConfig, setAiAssistantConfig] = useState<{
     isOpen: boolean;
@@ -408,7 +406,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-sky-200 selection:text-slate-900">
+    <div className="min-h-screen bg-neutral-50 text-neutral-900 flex flex-col font-sans selection:bg-neutral-900 selection:text-white">
       {/* Toast Notification Banner */}
       {notification && (
         <div className="fixed bottom-5 right-5 z-50 animate-in fade-in slide-in-from-bottom-3 duration-200">
@@ -436,7 +434,6 @@ export default function HomePage() {
         company={company}
         activeView={activeView}
         setActiveView={setActiveView}
-        onOpenAcademicDeck={() => setIsAcademicModalOpen(true)}
         onOpenProfile={() => setIsProfileModalOpen(true)}
         onOpenAuth={(mode, role) => setAuthModalConfig({ isOpen: true, mode, role: role || 'SEEKER' })}
         onSwitchUser={handleSwitchUser}
@@ -452,7 +449,6 @@ export default function HomePage() {
           <LandingPage
             featuredJobs={jobs}
             onOpenAuth={(mode, role) => setAuthModalConfig({ isOpen: true, mode, role: role || 'SEEKER' })}
-            onOpenAcademicDeck={() => setIsAcademicModalOpen(true)}
             onExploreJobs={(filterQuery) => {
               if (filterQuery) {
                 setLandingSearchQuery(filterQuery);
@@ -554,12 +550,6 @@ export default function HomePage() {
         onSave={handleSaveProfile}
       />
 
-      {/* Academic 7-Slide Viva Deck Modal */}
-      <AcademicPresentationModal
-        isOpen={isAcademicModalOpen}
-        onClose={() => setIsAcademicModalOpen(false)}
-      />
-
       {/* Pro & Freelancer Subscription Pricing Modal */}
       <PricingModal
         isOpen={isPricingModalOpen}
@@ -587,26 +577,36 @@ export default function HomePage() {
         }}
       />
 
-      {/* Quiet Academic Project Footer */}
-      <footer className="border-t border-neutral-200 bg-white py-6 mt-auto">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
+      {/* Platform Production Footer */}
+      <footer className="border-t border-neutral-200/80 bg-white py-8 mt-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-neutral-800">GlobalHire</span>
+            <span className="font-bold text-neutral-900">GlobalHire</span>
             <span aria-hidden="true">·</span>
-            <span>Final Year Project (Computer Science / IT)</span>
-            <span aria-hidden="true">·</span>
-            <span className="font-mono">Next.js 16 + Prisma ORM 7.8 + MySQL</span>
+            <span>Intelligent Global Tech Employment & Freelance Platform</span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-6">
             <button
-              onClick={() => setIsAcademicModalOpen(true)}
-              className="text-neutral-700 hover:text-neutral-900 font-medium underline underline-offset-4"
+              onClick={() => setActiveView('jobs')}
+              className="text-neutral-600 hover:text-neutral-900 transition-colors font-medium"
             >
-              Academic Slides Deck & Defense Mode
+              Explore Jobs
             </button>
-            <span aria-hidden="true">·</span>
-            <span>© 2026 GlobalHire Academic Research</span>
+            <button
+              onClick={() => setIsPricingModalOpen(true)}
+              className="text-neutral-600 hover:text-neutral-900 transition-colors font-medium"
+            >
+              Pro Pricing
+            </button>
+            <button
+              onClick={() => setActiveView('employer')}
+              className="text-neutral-600 hover:text-neutral-900 transition-colors font-medium"
+            >
+              Employers & ATS
+            </button>
+            <span aria-hidden="true" className="text-neutral-300">·</span>
+            <span>© 2026 GlobalHire Technologies Inc. All rights reserved.</span>
           </div>
         </div>
       </footer>

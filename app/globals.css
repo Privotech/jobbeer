@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+:root {
+  --brand-primary: #2563eb;
+  --brand-primary-hover: #1d4ed8;
+  --brand-primary-light: #eff6ff;
+  --brand-primary-border: #bfdbfe;
+  --brand-primary-text: #1e40af;
+  --brand-glow: rgba(37, 99, 235, 0.2);
+}
+
+[data-theme="cobalt"] {
+  --brand-primary: #2563eb;
+  --brand-primary-hover: #1d4ed8;
+  --brand-primary-light: #eff6ff;
+  --brand-primary-border: #bfdbfe;
+  --brand-primary-text: #1e40af;
+  --brand-glow: rgba(37, 99, 235, 0.2);
+}
+
+[data-theme="emerald"] {
+  --brand-primary: #059669;
+  --brand-primary-hover: #047857;
+  --brand-primary-light: #ecfdf5;
+  --brand-primary-border: #a7f3d0;
+  --brand-primary-text: #065f46;
+  --brand-glow: rgba(5, 150, 105, 0.2);
+}
+
+[data-theme="indigo"] {
+  --brand-primary: #4f46e5;
+  --brand-primary-hover: #4338ca;
+  --brand-primary-light: #eef2ff;
+  --brand-primary-border: #c7d2fe;
+  --brand-primary-text: #3730a3;
+  --brand-glow: rgba(79, 70, 229, 0.2);
+}
+
+[data-theme="violet"] {
+  --brand-primary: #7c3aed;
+  --brand-primary-hover: #6d28d9;
+  --brand-primary-light: #f5f3ff;
+  --brand-primary-border: #ddd6fe;
+  --brand-primary-text: #5b21b6;
+  --brand-glow: rgba(124, 58, 237, 0.2);
+}
+
+[data-theme="amber"] {
+  --brand-primary: #d97706;
+  --brand-primary-hover: #b45309;
+  --brand-primary-light: #fffbeb;
+  --brand-primary-border: #fde68a;
+  --brand-primary-text: #92400e;
+  --brand-glow: rgba(217, 119, 6, 0.2);
+}
+
+/* Custom interactive accents */
+.bg-brand-primary {
+  background-color: var(--brand-primary);
+}
+.hover\:bg-brand-primary-hover:hover {
+  background-color: var(--brand-primary-hover);
+}
+.bg-brand-light {
+  background-color: var(--brand-primary-light);
+}
+.text-brand-primary {
+  color: var(--brand-primary);
+}
+.text-brand-text {
+  color: var(--brand-primary-text);
+}
+.border-brand-primary {
+  border-color: var(--brand-primary);
+}
+.border-brand-border {
+  border-color: var(--brand-primary-border);
+}
+.shadow-brand {
+  box-shadow: 0 4px 14px 0 var(--brand-glow);
+}

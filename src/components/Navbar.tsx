@@ -3,7 +3,9 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { User, Profile, Company, Role } from '@/lib/types';
-import { ChevronDown, Briefcase, UserCheck, ShieldCheck, GraduationCap, Check, LogOut, ArrowRight, Sparkles, Crown, Zap } from 'lucide-react';
+import { ChevronDown, Briefcase, UserCheck, ShieldCheck, Check, LogOut, ArrowRight, Sparkles, Crown, Zap, Globe } from 'lucide-react';
+import ThemeSelector from './ThemeSelector';
+import { useTheme } from '@/lib/ThemeContext';
 
 interface NavbarProps {
   currentUser: User | null;
@@ -11,7 +13,6 @@ interface NavbarProps {
   company?: Company;
   activeView: 'landing' | 'jobs' | 'matches' | 'applications' | 'employer' | 'admin';
   setActiveView: (view: 'landing' | 'jobs' | 'matches' | 'applications' | 'employer' | 'admin') => void;
-  onOpenAcademicDeck: () => void;
   onOpenProfile: () => void;
   onOpenAuth: (mode: 'signin' | 'signup', role?: Role) => void;
   onSwitchUser: (userId: string) => void;
@@ -26,7 +27,6 @@ export default function Navbar({
   company,
   activeView,
   setActiveView,
-  onOpenAcademicDeck,
   onOpenProfile,
   onOpenAuth,
   onSwitchUser,
@@ -35,6 +35,7 @@ export default function Navbar({
   onOpenPricing,
 }: NavbarProps) {
   const [roleMenuOpen, setRoleMenuOpen] = useState(false);
+  const { currentOption } = useTheme();
 
   const demoPersonas = [
     {
@@ -66,7 +67,7 @@ export default function Navbar({
   const currentPersona = demoPersonas.find((p) => p.id === currentUser?.id) || demoPersonas[0];
 
   return (
-    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-sky-100 shadow-sm">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-200/80 shadow-2xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         
         {/* Zone 1: Brand Zone */}
@@ -77,27 +78,23 @@ export default function Navbar({
               e.preventDefault();
               setActiveView('landing');
             }}
-            className="text-xl font-bold tracking-tight text-sky-700 hover:text-sky-900 transition-colors"
+            className="flex items-center gap-2.5 group transition-transform"
           >
-            GlobalHire
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-primary via-indigo-600 to-blue-500 flex items-center justify-center text-white shadow-brand transition-transform group-hover:scale-105">
+              <Globe className="w-4 h-4 text-white" />
+            </div>
+            <span className="text-xl font-black tracking-tight text-neutral-900">
+              Global<span className="text-brand-primary">Hire</span>
+            </span>
           </Link>
-
-          {/* Academic Project Presentation Link */}
-          <button
-            onClick={onOpenAcademicDeck}
-            className="hidden lg:flex items-center gap-1.5 text-xs font-medium text-sky-700 hover:text-sky-900 py-1 px-2.5 rounded-md hover:bg-sky-50 transition-colors"
-          >
-            <GraduationCap className="w-3.5 h-3.5 text-sky-600" />
-            <span>Final Year Project (Slides & Viva Mode)</span>
-          </button>
         </div>
 
         {/* Zone 2: Navigation Links */}
-        <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
+        <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-neutral-600">
           <button
             onClick={() => setActiveView('landing')}
-            className={`transition-colors hover:text-sky-700 py-1 ${
-              activeView === 'landing' ? 'text-sky-700 border-b-2 border-sky-600' : ''
+            className={`transition-colors py-1 ${
+              activeView === 'landing' ? 'text-brand-primary border-b-2 border-brand-primary font-bold' : 'hover:text-neutral-900'
             }`}
           >
             Overview
@@ -105,8 +102,8 @@ export default function Navbar({
 
           <button
             onClick={() => setActiveView('jobs')}
-            className={`transition-colors hover:text-sky-700 py-1 ${
-              activeView === 'jobs' ? 'text-sky-700 border-b-2 border-sky-600' : ''
+            className={`transition-colors py-1 ${
+              activeView === 'jobs' ? 'text-brand-primary border-b-2 border-brand-primary font-bold' : 'hover:text-neutral-900'
             }`}
           >
             Explore Jobs
@@ -117,8 +114,8 @@ export default function Navbar({
             <>
               <button
                 onClick={() => setActiveView('matches')}
-                className={`transition-colors hover:text-sky-700 py-1 ${
-                  activeView === 'matches' ? 'text-sky-700 border-b-2 border-sky-600' : ''
+                className={`transition-colors py-1 ${
+                  activeView === 'matches' ? 'text-brand-primary border-b-2 border-brand-primary font-bold' : 'hover:text-neutral-900'
                 }`}
               >
                 Smart Matches
@@ -126,8 +123,8 @@ export default function Navbar({
 
               <button
                 onClick={() => setActiveView('applications')}
-                className={`transition-colors hover:text-sky-700 py-1 ${
-                  activeView === 'applications' ? 'text-sky-700 border-b-2 border-sky-600' : ''
+                className={`transition-colors py-1 ${
+                  activeView === 'applications' ? 'text-brand-primary border-b-2 border-brand-primary font-bold' : 'hover:text-neutral-900'
                 }`}
               >
                 My Applications
@@ -139,8 +136,8 @@ export default function Navbar({
           {currentUser && (currentUser.role === 'EMPLOYER' || currentUser.role === 'ADMIN') && (
             <button
               onClick={() => setActiveView('employer')}
-              className={`transition-colors hover:text-sky-700 py-1 ${
-                activeView === 'employer' ? 'text-sky-700 border-b-2 border-sky-600' : ''
+              className={`transition-colors py-1 ${
+                activeView === 'employer' ? 'text-brand-primary border-b-2 border-brand-primary font-bold' : 'hover:text-neutral-900'
               }`}
             >
               Employer ATS
@@ -151,8 +148,8 @@ export default function Navbar({
           {currentUser && currentUser.role === 'ADMIN' && (
             <button
               onClick={() => setActiveView('admin')}
-              className={`transition-colors hover:text-sky-700 py-1 ${
-                activeView === 'admin' ? 'text-sky-700 border-b-2 border-sky-600' : ''
+              className={`transition-colors py-1 ${
+                activeView === 'admin' ? 'text-brand-primary border-b-2 border-brand-primary font-bold' : 'hover:text-neutral-900'
               }`}
             >
               Admin Console
@@ -162,7 +159,7 @@ export default function Navbar({
           {onOpenAiAssistant && (
             <button
               onClick={onOpenAiAssistant}
-              className="transition-colors text-indigo-700 hover:text-indigo-900 font-bold py-1 flex items-center gap-1"
+              className="transition-colors text-brand-primary hover:opacity-85 font-bold py-1 flex items-center gap-1.5"
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-500" />
               <span>AI Assistant</span>
@@ -182,7 +179,10 @@ export default function Navbar({
         </nav>
 
         {/* Zone 3: Actions & Auth */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
+          {/* Theme Palette Switcher */}
+          <ThemeSelector />
+
           {!currentUser ? (
             // Public unauthenticated state
             <div className="flex items-center gap-2">
@@ -197,13 +197,13 @@ export default function Navbar({
               )}
               <button
                 onClick={() => onOpenAuth('signin')}
-                className="px-3.5 py-1.5 text-xs font-semibold text-slate-700 hover:text-sky-700 rounded-lg hover:bg-sky-50 transition-colors"
+                className="px-3.5 py-1.5 text-xs font-semibold text-neutral-700 hover:text-neutral-900 rounded-lg hover:bg-neutral-100 transition-colors"
               >
                 Sign In
               </button>
               <button
                 onClick={() => onOpenAuth('signup')}
-                className="px-4 py-1.5 text-xs font-bold text-white bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 rounded-xl transition-all shadow-sm flex items-center gap-1.5"
+                className="px-4 py-1.5 text-xs font-bold text-white bg-brand-primary hover:bg-brand-primary-hover rounded-xl transition-all shadow-brand flex items-center gap-1.5"
               >
                 <span>Get Started</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -285,7 +285,7 @@ export default function Navbar({
                 {roleMenuOpen && (
                   <div className="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-neutral-200 py-2 z-50">
                     <div className="px-3 py-1.5 border-b border-neutral-100 text-[10px] font-semibold text-neutral-400 tracking-wider">
-                      SWITCH TEST PERSONA (VIVA EVALUATION)
+                      SWITCH DEMO PERSONA & ROLE
                     </div>
 
                     {demoPersonas.map((persona) => {
@@ -323,23 +323,12 @@ export default function Navbar({
                       <button
                         onClick={() => {
                           setRoleMenuOpen(false);
-                          onOpenAcademicDeck();
-                        }}
-                        className="w-full text-left px-2 py-1.5 text-xs text-neutral-600 hover:text-neutral-900 rounded-lg hover:bg-neutral-50 flex items-center gap-2"
-                      >
-                        <GraduationCap className="w-3.5 h-3.5 text-neutral-500" />
-                        <span>Academic Viva Deck (Slides 1–7)</span>
-                      </button>
-
-                      <button
-                        onClick={() => {
-                          setRoleMenuOpen(false);
                           onLogout();
                         }}
                         className="w-full text-left px-2 py-1.5 text-xs text-red-600 hover:text-red-700 rounded-lg hover:bg-red-50 flex items-center gap-2 font-medium"
                       >
                         <LogOut className="w-3.5 h-3.5" />
-                        <span>Log Out to Landing Page</span>
+                        <span>Log Out</span>
                       </button>
                     </div>
                   </div>

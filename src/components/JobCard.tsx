@@ -32,7 +32,7 @@ export default function JobCard({ job, onSelect, onApply, onToggleSave, onOpenAi
   return (
     <div
       onClick={() => onSelect(job)}
-      className="group relative bg-white border border-neutral-200/80 hover:border-neutral-400/90 rounded-2xl p-5 transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-sm"
+      className="group relative bg-white border border-neutral-200/80 hover:border-brand-primary rounded-2xl p-5 transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-brand/20"
     >
       <div className="flex items-start justify-between gap-4">
         {/* Main Info */}
@@ -58,7 +58,7 @@ export default function JobCard({ job, onSelect, onApply, onToggleSave, onOpenAi
             )}
           </div>
 
-          <h3 className="text-base font-bold text-neutral-900 group-hover:text-neutral-700 transition-colors truncate">
+          <h3 className="text-base font-bold text-neutral-900 group-hover:text-brand-primary transition-colors truncate">
             {job.title}
           </h3>
 
@@ -88,14 +88,14 @@ export default function JobCard({ job, onSelect, onApply, onToggleSave, onOpenAi
           <div className="flex items-center gap-1.5">
             <button
               onClick={() => onToggleSave(job.id)}
-              className="p-1.5 text-neutral-400 hover:text-neutral-800 rounded-lg hover:bg-neutral-100 transition-colors"
+              className="p-1.5 text-neutral-400 hover:text-brand-primary rounded-lg hover:bg-neutral-100 transition-colors"
               title={job.isSaved ? 'Remove from saved' : 'Save job'}
             >
-              <Bookmark className={`w-4 h-4 ${job.isSaved ? 'fill-neutral-900 text-neutral-900' : ''}`} />
+              <Bookmark className={`w-4 h-4 ${job.isSaved ? 'fill-brand-primary text-brand-primary' : ''}`} />
             </button>
             <button
               onClick={() => onApply(job)}
-              className="px-3.5 py-1.5 text-xs font-bold text-white bg-neutral-900 hover:bg-neutral-800 rounded-xl transition-colors whitespace-nowrap inline-flex items-center gap-1 shadow-2xs"
+              className="px-3.5 py-1.5 text-xs font-bold text-white bg-brand-primary hover:bg-brand-primary-hover rounded-xl transition-all whitespace-nowrap inline-flex items-center gap-1 shadow-brand"
             >
               <span>{isFreelance ? 'Propose' : 'Apply'}</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -108,7 +108,7 @@ export default function JobCard({ job, onSelect, onApply, onToggleSave, onOpenAi
                 matchScore >= 85
                   ? 'bg-emerald-50 text-emerald-800 border border-emerald-200/60'
                   : matchScore >= 70
-                  ? 'bg-blue-50 text-blue-800 border border-blue-200/60'
+                  ? 'bg-brand-light text-brand-text border border-brand-border/60'
                   : 'bg-neutral-100 text-neutral-700 border border-neutral-200/60'
               }`}
               title={match?.rationale || `${matchScore}% Match Score`}
@@ -136,7 +136,7 @@ export default function JobCard({ job, onSelect, onApply, onToggleSave, onOpenAi
                 key={skill}
                 className={`text-xs px-2 py-0.5 rounded font-mono ${
                   isMatched
-                    ? 'bg-neutral-100 text-neutral-900 font-medium'
+                    ? 'bg-brand-light text-brand-text border border-brand-border/50 font-medium'
                     : 'text-neutral-600 hover:text-neutral-900'
                 }`}
               >
@@ -153,9 +153,9 @@ export default function JobCard({ job, onSelect, onApply, onToggleSave, onOpenAi
               e.stopPropagation();
               onOpenAiAssistant(job, isFreelance ? 'freelance_pitch' : 'cover_letter');
             }}
-            className="text-[11px] font-semibold text-neutral-700 hover:text-neutral-950 flex items-center gap-1 hover:underline"
+            className="text-[11px] font-semibold text-brand-primary hover:opacity-80 flex items-center gap-1 hover:underline"
           >
-            <Sparkles className="w-3 h-3 text-emerald-600" />
+            <Sparkles className="w-3 h-3 text-amber-500" />
             <span>{isFreelance ? 'AI Pitch' : 'AI Cover Letter'}</span>
           </button>
         )}

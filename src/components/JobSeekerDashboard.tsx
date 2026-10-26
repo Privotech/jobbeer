@@ -259,20 +259,20 @@ export default function JobSeekerDashboard({
           <div className="flex flex-wrap items-center gap-1 p-1 bg-neutral-100 rounded-xl">
             <button
               onClick={() => setFilterSegment('all')}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap ${
+              className={`px-3 py-1.5 text-xs rounded-lg transition-all whitespace-nowrap ${
                 filterSegment === 'all'
-                  ? 'bg-white text-neutral-900 shadow-2xs font-semibold'
-                  : 'text-neutral-600 hover:text-neutral-900'
+                  ? 'bg-white text-brand-primary shadow-xs font-bold'
+                  : 'text-neutral-600 hover:text-neutral-900 font-medium'
               }`}
             >
               All Roles ({jobs.length})
             </button>
             <button
               onClick={() => setFilterSegment('freelance')}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 text-xs rounded-lg transition-all whitespace-nowrap flex items-center gap-1.5 ${
                 filterSegment === 'freelance'
-                  ? 'bg-white text-indigo-900 shadow-2xs font-bold'
-                  : 'text-neutral-600 hover:text-neutral-900'
+                  ? 'bg-white text-indigo-700 shadow-xs font-bold'
+                  : 'text-neutral-600 hover:text-neutral-900 font-medium'
               }`}
             >
               <Briefcase className="w-3.5 h-3.5 text-indigo-600" />
@@ -280,31 +280,31 @@ export default function JobSeekerDashboard({
             </button>
             <button
               onClick={() => setFilterSegment('high_match')}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap flex items-center gap-1 ${
+              className={`px-3 py-1.5 text-xs rounded-lg transition-all whitespace-nowrap flex items-center gap-1 ${
                 filterSegment === 'high_match'
-                  ? 'bg-white text-neutral-900 shadow-2xs font-semibold'
-                  : 'text-neutral-600 hover:text-neutral-900'
+                  ? 'bg-white text-emerald-700 shadow-xs font-bold'
+                  : 'text-neutral-600 hover:text-neutral-900 font-medium'
               }`}
             >
-              <Sparkles className="w-3.5 h-3.5 text-neutral-800" />
+              <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
               <span>Smart Matches (≥ 80%)</span>
             </button>
             <button
               onClick={() => setFilterSegment('remote')}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap ${
+              className={`px-3 py-1.5 text-xs rounded-lg transition-all whitespace-nowrap ${
                 filterSegment === 'remote'
-                  ? 'bg-white text-neutral-900 shadow-2xs font-semibold'
-                  : 'text-neutral-600 hover:text-neutral-900'
+                  ? 'bg-white text-brand-primary shadow-xs font-bold'
+                  : 'text-neutral-600 hover:text-neutral-900 font-medium'
               }`}
             >
               Worldwide Remote
             </button>
             <button
               onClick={() => setFilterSegment('saved')}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap ${
+              className={`px-3 py-1.5 text-xs rounded-lg transition-all whitespace-nowrap ${
                 filterSegment === 'saved'
-                  ? 'bg-white text-neutral-900 shadow-2xs font-semibold'
-                  : 'text-neutral-600 hover:text-neutral-900'
+                  ? 'bg-white text-brand-primary shadow-xs font-bold'
+                  : 'text-neutral-600 hover:text-neutral-900 font-medium'
               }`}
             >
               Saved ({jobs.filter((j) => j.isSaved).length})

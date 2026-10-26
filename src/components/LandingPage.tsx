@@ -10,7 +10,6 @@ import {
   CheckCircle2,
   Briefcase,
   UserCheck,
-  GraduationCap,
   Layers,
   MapPin,
   Check,
@@ -19,11 +18,11 @@ import {
 } from 'lucide-react';
 
 import PredictiveSearchBar from './PredictiveSearchBar';
+import { useTheme } from '@/lib/ThemeContext';
 
 interface LandingPageProps {
   featuredJobs: Job[];
   onOpenAuth: (mode: 'signin' | 'signup', role?: Role) => void;
-  onOpenAcademicDeck: () => void;
   onExploreJobs: (filterQuery?: string) => void;
   onSelectJob: (job: Job) => void;
   onOpenPricing?: () => void;
@@ -33,12 +32,13 @@ interface LandingPageProps {
 export default function LandingPage({
   featuredJobs,
   onOpenAuth,
-  onOpenAcademicDeck,
   onExploreJobs,
   onSelectJob,
   onOpenPricing,
   onOpenAiAssistant,
 }: LandingPageProps) {
+  const { currentOption } = useTheme();
+
   const formatCompensation = (job: Job) => {
     const symbol = job.currency === 'EUR' ? '€' : job.currency === 'GBP' ? '£' : '$';
     if (job.rateType === 'HOURLY') {
@@ -53,34 +53,34 @@ export default function LandingPage({
   return (
     <div className="space-y-16 pb-16">
       {/* MODERN REFINED HERO SECTION WITH SUBTLE MESH GRADIENT & REFINED TYPOGRAPHY */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-sky-50 via-white to-indigo-50 text-slate-950 border border-sky-100 shadow-sm">
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-light via-white to-slate-50 text-neutral-950 border border-brand-border/70 shadow-sm">
         {/* Subtle Ambient Radial Lighting & Grid Matrix */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-15%,rgba(99,102,241,0.07),rgba(255,255,255,0))] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(#6366f110_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-15%,rgba(37,99,235,0.08),rgba(255,255,255,0))] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(#2563eb10_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         
         {/* Soft Ambient Light Glow Orbs */}
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-indigo-200/25 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-blue-100/35 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-brand-light/60 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-indigo-100/35 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 px-6 sm:px-10 lg:px-14 py-16 sm:py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column: Headline, Value Proposition, Action CTAs */}
           <div className="lg:col-span-7 space-y-6">
-            {/* Project Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-xs font-mono text-slate-600 border border-sky-100 shadow-sm">
+            {/* Status Pill */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-xs font-mono text-neutral-600 border border-brand-border/80 shadow-2xs">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Final Year Computer Science / IT Project</span>
-              <span aria-hidden="true" className="text-slate-400">·</span>
-              <span className="text-sky-700 font-medium">GlobalHire</span>
+              <span>Intelligent Tech Talent Marketplace</span>
+              <span aria-hidden="true" className="text-neutral-400">·</span>
+              <span className="text-brand-primary font-bold">Cross-Border Hiring Active</span>
             </div>
 
             {/* Headline with Increased Line Height for Legibility */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-950 leading-[1.2] sm:leading-[1.22] lg:leading-[1.24] text-balance">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-950 leading-[1.2] sm:leading-[1.22] lg:leading-[1.24] text-balance">
               Global Tech Talent. <br />
-              <span className="text-sky-700 font-semibold">Algorithmic Precision.</span>
+              <span className="text-brand-primary font-black">Algorithmic Precision.</span>
             </h1>
 
             {/* Body */}
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl text-balance">
+            <p className="text-sm sm:text-base text-neutral-600 leading-relaxed max-w-xl text-balance">
               A high-throughput full-stack employment platform connecting international developers and employers using
               multi-attribute skill scoring, timezone overlap calculations, and automated ATS workflows.
             </p>
@@ -98,7 +98,7 @@ export default function LandingPage({
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
                 onClick={() => onOpenAuth('signup', 'SEEKER')}
-                className="px-6 py-3 text-xs font-semibold text-white bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center gap-2"
+                className="px-6 py-3 text-xs font-bold text-white bg-brand-primary hover:bg-brand-primary-hover rounded-xl transition-all shadow-brand flex items-center gap-2"
               >
                 <span>Find Matched Roles</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -106,35 +106,27 @@ export default function LandingPage({
 
               <button
                 onClick={() => onOpenAuth('signup', 'EMPLOYER')}
-                className="px-6 py-3 text-xs font-semibold text-slate-800 bg-white hover:bg-sky-50 rounded-xl border border-sky-200 shadow-sm transition-all flex items-center gap-2"
+                className="px-6 py-3 text-xs font-semibold text-neutral-800 bg-white hover:bg-neutral-50 rounded-xl border border-neutral-200/90 shadow-2xs transition-all flex items-center gap-2"
               >
-                <Briefcase className="w-3.5 h-3.5 text-sky-600" />
+                <Briefcase className="w-3.5 h-3.5 text-neutral-600" />
                 <span>Hire Global Developers</span>
-              </button>
-
-              <button
-                onClick={onOpenAcademicDeck}
-                className="px-3.5 py-3 text-xs font-medium text-slate-600 hover:text-sky-700 transition-colors flex items-center gap-1.5"
-              >
-                <GraduationCap className="w-4 h-4 text-sky-600" />
-                <span>Viva Defense Slides</span>
               </button>
             </div>
 
             {/* Quick Metrics Bar */}
-            <div className="pt-6 border-t border-sky-100 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-mono text-slate-500">
+            <div className="pt-6 border-t border-neutral-200/60 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-mono text-neutral-500">
               <div className="flex items-center gap-1.5">
-                <span className="font-semibold text-slate-900 tabular-nums">Next.js 16</span>
-                <span className="text-slate-400">/</span>
+                <span className="font-semibold text-neutral-900 tabular-nums">Next.js 16</span>
+                <span className="text-neutral-400">/</span>
                 <span>TypeScript</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="font-semibold text-slate-900 tabular-nums">Prisma 7.8</span>
-                <span className="text-slate-400">/</span>
+                <span className="font-semibold text-neutral-900 tabular-nums">Prisma 7.8</span>
+                <span className="text-neutral-400">/</span>
                 <span>MySQL</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="text-emerald-600 font-semibold tabular-nums">4-Pillar</span>
+                <span className="text-emerald-700 font-semibold tabular-nums">4-Pillar</span>
                 <span>Matching Engine</span>
               </div>
             </div>
@@ -223,7 +215,7 @@ export default function LandingPage({
           {/* Pathway 1: Seeker & Freelancer */}
           <div className="group bg-white border border-neutral-200/80 hover:border-neutral-400 rounded-2xl p-6 transition-all duration-200 shadow-2xs hover:shadow-sm flex flex-col justify-between space-y-6">
             <div className="space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-neutral-100 group-hover:bg-neutral-900 group-hover:text-white transition-colors flex items-center justify-center text-neutral-800">
+              <div className="w-10 h-10 rounded-xl bg-neutral-100 group-hover:bg-brand-primary group-hover:text-white transition-colors flex items-center justify-center text-neutral-800">
                 <UserCheck className="w-5 h-5" />
               </div>
               <div>
@@ -252,7 +244,7 @@ export default function LandingPage({
             <div className="space-y-2 pt-2 border-t border-neutral-100">
               <button
                 onClick={() => onOpenAuth('signup', 'SEEKER')}
-                className="w-full py-2.5 px-4 text-xs font-semibold text-white bg-neutral-900 hover:bg-neutral-800 rounded-xl transition-colors flex items-center justify-center gap-1.5"
+                className="w-full py-2.5 px-4 text-xs font-bold text-white bg-brand-primary hover:bg-brand-primary-hover rounded-xl transition-all shadow-brand flex items-center justify-center gap-1.5"
               >
                 <span>Enter as Candidate / Freelancer</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -349,12 +341,6 @@ export default function LandingPage({
                 <span>Enter Admin Console</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
-              <button
-                onClick={onOpenAcademicDeck}
-                className="w-full py-1.5 text-xs font-medium text-neutral-500 hover:text-neutral-900 text-center"
-              >
-                Review Viva Project Slides
-              </button>
             </div>
           </div>
         </div>
@@ -364,8 +350,8 @@ export default function LandingPage({
       <section className="bg-white border border-neutral-200 rounded-3xl p-8 sm:p-10 space-y-6 shadow-xs">
         <div className="max-w-xl space-y-1.5">
           <div className="flex items-center gap-2 text-xs font-mono text-neutral-500">
-            <Sparkles className="w-3.5 h-3.5 text-neutral-700" />
-            <span>ALGORITHMIC SPECIFICATION (SLIDE 3 & 4)</span>
+            <Sparkles className="w-3.5 h-3.5 text-brand-primary" />
+            <span>CORE MATCHING ARCHITECTURE</span>
           </div>
           <h2 className="text-2xl font-bold tracking-tight text-neutral-900">
             Multi-Attribute Contextual Matching
@@ -550,29 +536,31 @@ export default function LandingPage({
         </div>
       </section>
 
-      {/* ACADEMIC PRESENTATION BANNER */}
-      <section className="bg-neutral-100/80 border border-neutral-200 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+      {/* ENTERPRISE & HIRING CTA BANNER */}
+      <section className="bg-gradient-to-r from-brand-light via-white to-slate-50 border border-brand-border/80 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xs">
         <div className="flex items-start gap-4">
-          <div className="w-11 h-11 rounded-2xl bg-neutral-900 text-white flex items-center justify-center shrink-0">
-            <GraduationCap className="w-5 h-5" />
+          <div className="w-11 h-11 rounded-2xl bg-brand-primary text-white flex items-center justify-center shrink-0 shadow-brand">
+            <Globe className="w-5 h-5 text-white" />
           </div>
           <div className="space-y-0.5">
             <h3 className="text-base font-bold text-neutral-900">
-              Computer Science & IT Final Year Project · Viva Defense Mode
+              Ready to Hire or Get Hired Globally?
             </h3>
             <p className="text-xs text-neutral-500 max-w-xl leading-relaxed">
-              Explore the 7 academic slides, MySQL Prisma ORM schema specifications, relational entity models, and system architecture directly in presentation mode.
+              Join thousands of cross-border developers, independent tech contractors, and engineering teams hiring across 40+ timezones with automated ATS workflows.
             </p>
           </div>
         </div>
 
-        <button
-          onClick={onOpenAcademicDeck}
-          className="px-5 py-2.5 text-xs font-semibold text-white bg-neutral-900 hover:bg-neutral-800 rounded-xl transition-colors shrink-0 shadow-xs flex items-center gap-2"
-        >
-          <Layers className="w-3.5 h-3.5" />
-          <span>Launch 7-Slide Deck</span>
-        </button>
+        <div className="flex items-center gap-3 shrink-0">
+          <button
+            onClick={() => onOpenAuth('signup', 'SEEKER')}
+            className="px-5 py-2.5 text-xs font-bold text-white bg-brand-primary hover:bg-brand-primary-hover rounded-xl transition-all shadow-brand flex items-center gap-2"
+          >
+            <span>Get Started</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </section>
     </div>
   );
